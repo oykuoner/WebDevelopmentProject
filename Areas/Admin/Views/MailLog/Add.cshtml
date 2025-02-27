@@ -1,0 +1,176 @@
+﻿@using LSDCS.Entity.DTOs.MailRecipient;
+@model MailLogAddDto
+
+<!--Admin Add-->
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">E-Mail Management /</span> Parent E-Mail Add</h4>
+
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+
+
+
+                <form asp-area="Admin" asp-controller="Maillog" asp-action="Add" method="post" enctype="multipart/form-data" id="registerForm" onsubmit="return validateForm()">
+                    <div asp-validation-summary="ModelOnly"> </div>
+                    <div class="card-body">
+                        <div>
+                            <div class="form-group mb-3">
+                                <div class="form-group mb-3">
+                                    <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">MÜVEKKİL</label>
+                                    <select id="clientList" class="form-select mb-3 form-select-lg font-weight-bold " style="height: 50px;" asp-for="ClientId" asp-items="@(new SelectList(Model.Clients,"Id","ClientName"))"> </select>
+                                    <span asp-validation-for="ClientId" class="text-danger"></span>
+                                </div>
+
+                                <label class="font-weight-bold text-primary fs-5"  for="MAIL_YONU">E-MAİL YÖNÜ</label>
+                                <select class="form-control font-weight-bold" asp-for="MAIL_YONU">
+                                    <option  value="GIDEN MAIL">GIDEN MAIL</option>
+                                    <option value="GELEN MAIL">GELEN MAIL</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">GÖNDERİCİ MAİL</label>
+                                <input asp-for="GONDERICI_MAIL" type="email" class="form-control mb-3" id="defaultFormControlInput" placeholder="Gönderici E-Mail" aria-describedby="defaultFormControlHelp">
+                                <span asp-validation-for="GONDERICI_MAIL" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">GÖNDERİCİ İSİM-SOYİSİM</label>
+                                <input asp-for="GONDERICI_ISIM" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Gönderici İsim-Soyisim" aria-describedby="defaultFormControlHelp">
+                                <span asp-validation-for="GONDERICI_ISIM" class="text-danger"></span>
+
+                            </div>
+
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">ALICI TO</label>
+                                <input type="text" class="form-control form-control-user"
+                                       name="ALICI_TO"
+                                       id="ALICI_TO"
+                                       value="@string.Join(", ",Model?.ALICI_TO ?? new List<string>())"
+                                       placeholder="Alıcı TO">
+                                <div id="errorTO" style="color: red;"></div>
+                            </div>
+
+                            <div class="form-group mb-3">
+
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">ALICI CC</label>
+                                <input type="text" class="form-control form-control-user"
+                                       name="ALICI_CC"
+                                       id="ALICI_CC"
+                                       value="@string.Join(", ",Model?.ALICI_CC ?? new List<string>())"
+                                       placeholder="Alıcı CC">
+                                <div id="errorCC" style="color: red;"></div>
+
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">MAİL KONUSU</label>
+                                <input asp-for="MAIL_KONUSU" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Mail konusu" aria-describedby="defaultFormControlHelp">
+                                <span asp-validation-for="MAIL_KONUSU" class="text-danger"></span>
+                            </div>
+
+
+
+
+                            <div class="row g-3 align-items-center mb-4">
+                                <div class="col-auto font-weight-bold text-primary fs-5">
+                                    <label for="startDate" class="me-2">MAİL GÖNDERİM TARİHİ:</label>
+                                </div>
+                                <div class="col-auto">
+                                    <input asp-for="MAIL_GONDERIM_TARIHI" class="form-control text-black font-weight-bold fs-5" id="datetimePicker" name="date">
+
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">TALEBİN YANITLANMASI İÇİN VERİLEN SÜRE (Saat)</label>
+                                <input asp-for="TALEP_SURESI" type="NUMBER" class="form-control mb-3" id="defaultFormControlInput" placeholder="Talebin yanıtlanması için verilen süre" aria-describedby="defaultFormControlHelp">
+                                <span asp-validation-for="TALEP_SURESI" class="text-danger"></span>
+
+                            </div>
+
+
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">OLAY ÖZETİ </label>
+                                <textarea asp-for="OLAY_OZETI" class=" form-control" rows="6" placeholder="Olay özeti..."></textarea>
+                                <span asp-validation-for="OLAY_OZETI" class="text-danger"></span>
+                            </div>
+
+
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">HUKUKI TALEP KONUSU</label>
+                                <input asp-for="HUKUKI_TALEP_KONUSU" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Hukuki talep konusu" aria-describedby="defaultFormControlHelp">
+                                <span asp-validation-for="HUKUKI_TALEP_KONUSU" class="text-danger"></span>
+                            </div>
+
+
+                        
+                           
+                            
+                            <!--Bu alan child mail oluşturulurken kullanılacak bir alan-->
+
+                        @*   <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="form-label">HUKUKİ DEĞERLENDİRME </label>
+                                <textarea asp-for="HUKUKI_DEGERLENDIRME" class=" form-control" rows="10" placeholder="Dosya hakkında yorum yapın..."></textarea>
+                                <span asp-validation-for="HUKUKI_DEGERLENDIRME" class="text-danger"></span>
+
+                            </div> *@
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5">MÜVEKKİL SORULARI</label>
+                                <textarea asp-for="MUVEKKIL_SORULARI" class="form-control" rows="6" placeholder="Müvekkil soruları"></textarea>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="formFileMultiple" class="font-weight-bold text-primary fs-5">DÖKÜMANLAR</label>
+                                <input class="form-control" type="file" asp-for="Documents" id="formFileMultiple" placeholder="İlgili dökümanlar" multiple>
+                                <div id="fileList"></div>
+                            </div>
+
+                            <div class="form-group mb-3">
+                                <label for="defaultFormControlInput" class="font-weight-bold text-primary fs-5"> DÖKÜMAN ÖZETİ</label>
+                                <textarea asp-for="DOKUMAN_OZETI" class="form-control" rows="6" placeholder="Döküman özeti"></textarea>
+                            </div>
+
+
+
+                          
+
+                      
+                            <div class="form-group mb-3">
+                                <button type="submit" class="btn btn-primary btn-block ">Create</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+@section Scripts{
+    <script src="~/js/emailValidation.js" type="text/javascript"></script>
+
+    }
+
+<script>
+    flatpickr("#datetimePicker", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i",
+        noCalendar: false,
+        time_24hr: true,
+        minuteIncrement: 1,
+        locale: 'tr'  // Türkçe dil ayarını etkinleştir
+    });
+</script>

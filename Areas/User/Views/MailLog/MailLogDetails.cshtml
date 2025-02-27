@@ -1,0 +1,204 @@
+﻿@* ADMİN PANEL *@
+
+<div class="container-xxl flex-grow-1 container-p-y">
+
+
+
+    <div class="row invoice-preview">
+        <!-- Invoice -->
+        <div class="col-xl-9 col-md-8 col-12 mb-md-0 mb-4">
+            <div class="card invoice-preview-card">
+                <div class="card-body">
+                    <div class="d-flex justify-content-between flex-xl-row flex-md-column flex-sm-row flex-column p-sm-3 p-0">
+                        <div class="mb-xl-0 mb-4">
+                            <div class="d-flex svg-illustration mb-3 gap-2">
+                                <span class="app-brand-logo demo">
+                                    <div style="display: flex; flex-direction: column; align-items: start; position: relative; font-size: 30px;" class="mb-3">
+                                        <span class="app-brand-text text-primary fw-bold ms-0" style="font-weight: bold; text-transform: uppercase;">LSDCS</span>
+                                        <span class="ms-0 text-primary" style="font-size: 10px; margin-top: 5px;">Legal Services Data Classification System</span>
+                                    </div>
+
+                                    <span class="mb-1 font-weight-bold text-primary fs-5">MÜVEKKİL : </span>
+                                    <span class="fw-medium">@Model.Client</span>
+                                </span>
+
+                            </div>
+
+                        </div>
+                        <div>
+                            <h4 class="text-primary">
+                                MailId #
+                                <a style="color: #30b2bd;" asp-area="User" asp-controller="MailLog" asp-action="MailLogUpdate" asp-route-mailLogId="@Model.Id">
+                                    @Model.Id
+                                    <img src="~/sneat/assets/img/icons/myicons/edit.png" alt="Avatar" class="rounded-circle">
+                                </a>
+
+                                |
+
+                                <a class="" style="color: #30b2bd;" asp-area="User" asp-controller="MailLog" asp-action="ChildMailList" asp-route-id="@Model.Id">
+
+
+                                    <img src="~/sneat/assets/img/icons/myicons/back.png" alt="Avatar" class="rounded-circle">
+                                    LİSTEYE GERİ DÖN
+
+
+                                </a>
+                            </h4>
+                            <div class="mb-2">
+                                <span class="me-1 font-weight-bold text-primary fs-5">MAİL DURUMU:</span>
+                                @if (Model.Deleted)
+                                {
+                                    <span class="badge bg-label-danger font-weight-bold fs-5">AKTİF DEĞİL</span>
+                                }
+                                else
+                                {
+                                    <span class="badge bg-label-success font-weight-bold fs-5">AKTİF</span>
+                                }
+                            </div>
+                            <div class="mb-2">
+                                <span class="me-1 text-primary font-weight-bold fs-5">MAiL YÖNÜ: </span>
+                                <span class="font-weight-bold fs-5">@Model.MAIL_YONU</span>
+                            </div>
+                            <div class="mb-2">
+                                <span class="me-1 text-primary font-weight-bold fs-5">MAİL GÖNDERİM TARİHİ :</span>
+                                <span class="font-weight-bold fs-5">@Model.MAIL_GONDERIM_TARIHI</span>
+                            </div>
+                            <div>
+                                <span class="me-1 text-primary font-weight-bold fs-5">MAİL LOGLAMA TARİHİ :</span>
+                                <span class="font-weight-bold fs-5">@Model.CreatedDate</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0">
+
+                <div class="card-body">
+
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-5">
+                            <span class="pb-2 text-primary font-weight-bold fs-5">GÖNDERİCİ MAİL: </span>
+                            <span class="font-weight-bold fs-5">@Model.GONDERICI_MAIL</span>
+
+                        </div>
+                        <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-5">
+                            <span class="pb-2 text-primary font-weight-bold fs-5">GÖNDERİCİ MAİL: </span>
+                            <span class="font-weight-bold fs-5">@Model.GONDERICI_ISIM</span>
+
+                        </div>
+                        <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-5">
+                            <span class="pb-2 text-primary font-weight-bold fs-5">ALICI TO: </span>
+                            <span class="font-weight-bold fs-5">@String.Join(", ", @Model.ALICI_TO)</span>
+
+                        </div>
+                        <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+
+                            <span class="pb-2 text-primary font-weight-bold fs-5">ALICI CC: </span>
+                            <span class="font-weight-bold fs-5">@String.Join(", ", @Model.ALICI_CC)</span>
+                        </div>
+
+                    </div>
+                </div>
+                <hr class="my-0">
+                <div class="card-body">
+                    <div class="row p-sm-3 p-0">
+
+                        <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+                            <span class="pb-2 text-primary font-weight-bold fs-5">MAİL KONUSU : </span>
+                            <span class="fw-medium font-weight-bold fs-5">@Model.MAIL_KONUSU</span>
+
+                        </div>
+
+
+                    </div>
+                </div>
+
+
+                <hr class="my-0">
+                <div class="card-body">
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-12">
+
+
+                            <span class="pb-2  text-primary  font-weight-bold fs-5 ">OLAY ÖZETİ</span>
+                            <br>
+                            <span>
+                                @Model.OLAY_OZETI
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0">
+                <div class="card-body">
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-12">
+                            <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+
+                                <span class="pb-2 text-primary font-weight-bold fs-5">HUKUKİ TALEP KONUSU : </span>
+                                <span class="font-weight-bold fs-5">@Model.HUKUKI_TALEP_KONUSU</span>
+
+                            </div>
+
+                            <span class="pb-2 text-primary font-weight-bold fs-5">HUKUKİ DEĞERLENDİRME</span>
+                            <br />
+                            <span>
+                                @Model.HUKUKI_DEGERLENDIRME
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <hr class="my-0">
+                <div class="card-body">
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-12">
+                            <div class="col-xl-10 col-md-12 col-sm-5 col-12 mb-xl-0 mb-md-4 mb-sm-0 mb-4">
+
+                                <span class="pb-2 text-primary font-weight-bold fs-5">MÜVEKKİLİN SORULARI : </span>
+                                <span class="font-weight-bold fs-5">@Model.MUVEKKIL_SORULARI </span>
+
+                            </div>
+
+                            <span class="pb-2 text-primary font-weight-bold fs-5">MÜVEKKİLE VERİLEN CEVAPLAR</span>
+                            <br />
+                            <span>
+                                @Model.MUVEKKILE_VERILEN_CEVAP
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr class="my-0">
+                <div class="card-body">
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-12">
+                            <label for="formFileMultiple" class="font-weight-bold text-primary fs-5">DÖKÜMANLAR</label>
+                            @foreach (var documentInfo in Model.DocumentInfos)
+                            {
+                                <p id="document-@documentInfo.Id">
+                                    <a href="/BTSDocuments/@documentInfo.DocumentUrl" target="_blank">@documentInfo.DocumentName</a>
+
+                                </p>
+                            }
+                        </div>
+                    </div>
+                    <div class="row p-sm-3 p-0">
+                        <div class="col-12">
+                            <span class="pb-2 text-primary font-weight-bold fs-5">DÖKÜMAN ÖZETİ</span>
+                            <br />
+                            <span>
+                                @Model.DOKUMAN_OZETI
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Offcanvas -->
+        <!-- /Send Invoice Sidebar -->
+        <!-- Add Payment Sidebar -->
+        <!-- /Add Payment Sidebar -->
+        <!-- /Offcanvas -->
+
+
+    </div>

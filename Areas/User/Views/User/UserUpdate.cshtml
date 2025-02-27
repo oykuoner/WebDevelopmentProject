@@ -1,0 +1,96 @@
+﻿@model UserUpdateDto
+
+
+<div class="container-xxl">
+    <div class="authentication-wrapper authentication-basic container-p-y">
+        <div class="authentication-inner">
+            <!-- Register Card -->
+            <div class="card">
+                <div class="card-body">
+                    <!-- Logo -->
+                    <div class="app-brand justify-content-center">
+                        <a href="/Admin/User/UserAdd" class="app-brand-link">
+                            <div style="display: flex; flex-direction: column; align-items: start; position: relative; font-size: 30px;">
+                                <span class="app-brand-text fw-bold ms-0" style="font-weight: bold; text-transform: uppercase;">LSDCS</span>
+                                <span class="ms-0" style=" height: 50px; font-size: 15px; margin-top: 5px;">Legal Services Data Classification System</span>
+                            </div>
+
+
+
+
+                            <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+                                <i class="bx bx-chevron-left bx-sm align-middle"></i>
+                            </a>
+                    </div>
+                    <!-- /Logo -->
+                    <h4 class="mb-5">User Update 🚀</h4>
+
+
+                    <form id="formAuthentication" class="mb-3" asp-controller="User" asp-action="UserUpdate" method="POST">
+                        <input type="hidden" asp-for="Id"/>
+                        <div asp-validation-summary="All" style="color:red"> </div>
+                        <div class="mb-3">
+                            <label asp-for="FirtsName" id="defaultFormControlInput" class="form-label">First Name</label>
+                            <input asp-for="FirtsName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Please enter your firts name." aria-describedby="defaultFormControlHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="LastName" id="defaultFormControlInput" class="form-label">Last Name</label>
+                            <input asp-for="LastName" type="text" class="form-control mb-3" id="defaultFormControlInput" placeholder="Please enter your last name." aria-describedby="defaultFormControlHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="Email" id="defaultFormControlInput" class="form-label">User E-Mail</label>
+                            <input asp-for="Email" type="email" class="form-control mb-3" id="defaultFormControlInput" placeholder="Please enter your user e-mail adress." aria-describedby="defaultFormControlHelp">
+                        </div>
+                        <div class="mb-3">
+                            <label asp-for="RoleId" id="defaultFormControlInput" class="form-label">User Role</label>
+                            <select class="form-select mb-3 form-select-lg " style="height: 45px;" asp-for="RoleId" asp-items="@(new SelectList(Model.Roles,"Id","Name"))"> </select>
+
+                            </select>
+
+                        </div>
+                       
+
+                        <button class="btn btn-primary d-grid w-100">Update</button>
+                    </form>
+
+                    <p class="text-center">
+                        <span>Already have an account?</span>
+                        <a href="auth-login-basic.html">
+                            <span>Sign in instead</span>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <!-- Register Card -->
+        </div>
+    </div>
+</div>
+
+<!-- / Content -->
+
+<div class="buy-now">
+    <a href="https://themeselection.com/products/sneat-bootstrap-html-admin-template/"
+       target="_blank"
+       class="btn btn-danger btn-buy-now">Upgrade to Pro</a>
+</div>
+
+<!-- Core JS -->
+<!-- build:js assets/vendor/js/core.js -->
+<script src="../assets/vendor/libs/jquery/jquery.js"></script>
+<script src="../assets/vendor/libs/popper/popper.js"></script>
+<script src="../assets/vendor/js/bootstrap.js"></script>
+<script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
+
+<script src="../assets/vendor/js/menu.js"></script>
+<!-- endbuild -->
+<!-- Vendors JS -->
+<!-- Main JS -->
+<script src="../assets/js/main.js"></script>
+
+<!-- Page JS -->
+<!-- Place this tag in your head or just before your close body tag. -->
+<script async defer src="https://buttons.github.io/buttons.js"></script>
+@section Scripts{
+    <script src="~/js/emailValidation.js" type="text/javascript"></script>
+
+    }

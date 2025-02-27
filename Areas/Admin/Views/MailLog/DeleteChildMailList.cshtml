@@ -1,0 +1,196 @@
+﻿@model List<MailLogListDto>
+
+<div class="container-xxl flex-grow-1 container-p-y">
+    <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">E-Mail Management /<span class="badge  bg-label-danger">Delete Child E-Mails</h4>
+
+    <!-- Basic Bootstrap Table -->
+    <div class="card">
+
+        <div class="table-responsive text-nowrap m-5">
+
+
+
+            <table class="table table-bordered" id="amailLogsTable" width="100%" cellspacing="0  ">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Client</th>
+                        <th>MAIL YONU</th>
+                        <th>GONDERICI MAIL</th>
+                        <th>ALICI(TO)</th>
+                        <th>ALICI(CC)</th>
+                        <th>MAIL KONUSU</th>
+                        <th>HUKUKI TALEP KONUSU</th>
+
+                        @*     <th>HUKUKI_DEGERLENDIRME</th>
+                        <th>OLAY_OZETI</th>
+                        <th>DOKUMAN_OZETI</th> *@
+
+                        <th>MAIL GONDERIM TARIHI</th>
+
+                        <th>CreatedBy</th>
+                        <th>Created Date</th>
+                        <th>ModifiedBy</th>
+                        <th>Madified Date</th>
+                        <th>DeletedBy</th>
+                        <th>Deleted Date</th>
+                        <th>IsDeleted</th>
+                        @* <th>User</th>
+                        <th>User Status</th> *@
+                        <th>Operations</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>Action</th>
+                        <th>Client</th>
+                        <th>MAIL YONU</th>
+                        <th>GONDERICI_MAIL</th>
+                        <th>ALICI(TO)</th>
+                        <th>ALICI(CC)</th>
+                        <th>MAIL KONUSU</th>
+                        <th>HUKUKI TALEP KONUSU</th>
+
+                        @*   <th>HUKUKI_DEGERLENDIRME</th>
+                        <th>OLAY_OZETI</th>
+                        <th>DOKUMAN_OZETI</th> *@
+
+                        <th>MAIL GONDERIM TARIHI</th>
+
+                        <th>CreatedBy</th>
+                        <th>Created Date</th>
+                        <th>ModifiedBy</th>
+                        <th>Madified Date</th>
+                        <th>DeletedBy</th>
+                        <th>Deleted Date</th>
+                        <th>IsDeleted</th>
+                        @*  <th>User</th>
+                        <th>User Status</th> *@
+                        <th>Operations</th>
+                    </tr>
+                </tfoot>
+                <tbody class="table-border-bottom-0">
+                    @foreach (var item in Model)
+                    {
+                        <tr name="@item.Id">
+
+                            <td>
+                                <div class="dropdown">
+
+                                    <span class="text-primary mr-2">#@item.Id</span>
+                                    <a asp-area="Admin" asp-controller="MailLog" asp-action="MailLogDetails" asp-route-mailLogId="@item.Id" class="text-body mr-2" aria-label="Preview Invoice" title="Mail İçeriği Görüntüle">
+                                        <img src="~/sneat/assets/img/icons/myicons/view_content.png" alt="Avatar" class="rounded-circle">
+
+                                    </a>
+
+                                    <a class="mr-2" title="Çöp kutusundan çıkar" asp-area="Admin" asp-action="MailLogUndoDelete" asp-controller="MailLog" asp-route-mailLogId="@item.Id">
+                                        <img src="~/sneat/assets/img/icons/myicons/recover.png" alt="Avatar" class="rounded-circle">
+                                    </a>
+
+
+
+                                    @* <a class="btn btn-danger btn-sm" href="@Url.Action("MailLogSafeDelete", "MailLog", new { area = "Admin", mailLogId = item.Id })">
+                                <i class="bx bx-minus-circle"></i> Delete</a> *@
+
+
+
+                                </div>
+
+
+
+                            </td>
+                            <td>@item.Client.ClientName</td>
+                            <td>@item.MAIL_YONU</td>
+                            <td>@item.GONDERICI_MAIL</td>
+
+                            <!-- Diğer td'leriniz... -->
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    @foreach (var recipient in item.ALICI_TO)
+                                    {
+                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="@recipient" data-bs-original-title="@recipient">
+                                            <img src="~/sneat/assets/img/avatars/user (1).png" alt="Avatar" class="rounded-circle">
+                                            <span class="d-none">@recipient</span>
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+
+                            <td>
+                                <ul class="list-unstyled users-list m-0 avatar-group d-flex align-items-center">
+                                    @foreach (var recipient in item.ALICI_CC)
+                                    {
+                                        <li data-bs-toggle="tooltip" data-popup="tooltip-custom" data-bs-placement="top" class="avatar avatar-xs pull-up" aria-label="@recipient" data-bs-original-title="@recipient">
+                                            <img src="~/sneat/assets/img/avatars/user (1).png" alt="Avatar" class="rounded-circle">
+                                            <span class="d-none">@recipient</span> <!-- Gizli metin etiketi -->
+                                        </li>
+                                    }
+                                </ul>
+                            </td>
+                            <!-- Diğer td'leriniz... -->
+                            @*   <td>@String.Join(", ", item.ALICI_TO)</td> *@
+                            @*       <td>@String.Join(", ", item.ALICI_CC)</td> *@
+
+
+                            <td>@item.MAIL_KONUSU</td>
+                            <td>@item.HUKUKI_TALEP_KONUSU</td>
+
+                            @*  <td>@item.HUKUKI_DEGERLENDIRME</td>
+                        <td>@item.OLAY_OZETI</td>
+                        <td>@item.DOKUMAN_OZETI</td> *@
+
+                            <td>@item.MAIL_GONDERIM_TARIHI</td>
+
+                            <td>@item.CreatedBy</td>
+                            <td>@item.CreatedDate</td>
+                            <td>@item.ModifiedBy</td>
+                            <td>@item.ModifiedDate</td>
+                            <td>@item.DeletedBy</td>
+                            <td>@item.DeletedDate</td>
+
+                            <td>
+                                <span class="badge  bg-label-danger">
+                                    @(item.Deleted ? "Aktif Değil" : "Aktif")
+                                </span>
+
+                            </td>
+
+                            <th></th>
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!--/ Basic Bootstrap Table -->
+
+</div>
+@section Scripts{
+    <script src="~/js/mailLogIndex.js" type="text/javascript"></script>
+
+    }
+
+
+<!-- Mail Bilgilerini Göstermek İçin Modal -->
+<div class="modal fade" id="invoicePreviewModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="mailDetailsModalLabel">Mail Detayları</h5>
+                <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p><strong>Gönderici:</strong> <span id="mailGONDERICI_MAIL"></span></p>
+                <p><strong>Konu:</strong> <span id="mailMAIL_KONUSU"></span></p>
+                <p><strong>İçerik:</strong> <span id="mailContent"></span></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
